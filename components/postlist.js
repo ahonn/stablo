@@ -1,18 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cx } from "@utils/all";
-import GetImage from "@utils/getImage";
 import { parseISO, format } from "date-fns";
 import { PhotographIcon } from "@heroicons/react/outline";
 import CategoryLabel from "@components/blog/category";
 
 export default function PostList({ post, aspect, preloadImage }) {
-  const imageProps = post?.mainImage
-    ? GetImage(post.mainImage)
-    : null;
-  const AuthorimageProps = post?.author?.image
-    ? GetImage(post.author.image)
-    : null;
   return (
     <>
       <div className="cursor-pointer group">
@@ -20,16 +13,14 @@ export default function PostList({ post, aspect, preloadImage }) {
           className={cx(
             "relative overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800   hover:scale-105",
             aspect === "landscape" ? "aspect-video" : "aspect-square"
-          )}>
+          )}
+        >
           <Link href={`/post/${post.slug.current}`}>
             <a>
-              {imageProps ? (
+              {post.mainImage ? (
                 <Image
-                  src={imageProps.src}
-                  loader={imageProps.loader}
-                  blurDataURL={imageProps.blurDataURL}
+                  src={post.mainImage.src}
                   alt={post.mainImage.alt || "Thumbnail"}
-                  placeholder="blur"
                   sizes="80vw"
                   //sizes="(max-width: 640px) 90vw, 480px"
                   layout="fill"
@@ -55,7 +46,8 @@ export default function PostList({ post, aspect, preloadImage }) {
           bg-no-repeat
           transition-[background-size]
           duration-500
-          hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]">
+          hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]"
+            >
               {post.title}
             </span>
           </Link>
@@ -76,13 +68,10 @@ export default function PostList({ post, aspect, preloadImage }) {
             <div className="relative flex-shrink-0 w-5 h-5">
               {post.author.image && (
                 <Image
-                  src={AuthorimageProps.src}
-                  blurDataURL={AuthorimageProps.blurDataURL}
-                  loader={AuthorimageProps.loader}
+                  src={post.author.image}
                   objectFit="cover"
                   layout="fill"
                   alt={post?.author?.name}
-                  placeholder="blur"
                   sizes="30px"
                   className="rounded-full"
                 />
@@ -95,7 +84,8 @@ export default function PostList({ post, aspect, preloadImage }) {
           </span>
           <time
             className="text-sm"
-            dateTime={post?.publishedAt || post._createdAt}>
+            dateTime={post?.publishedAt || post._createdAt}
+          >
             {format(
               parseISO(post?.publishedAt || post._createdAt),
               "MMMM dd, yyyy"

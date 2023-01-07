@@ -3,8 +3,6 @@ import { Disclosure } from "@headlessui/react";
 import Container from "@components/container";
 import Link from "next/link";
 import Image from "next/image";
-import GetImage from "@utils/getImage";
-import { myLoader } from "@utils/all";
 
 export default function Navbar(props) {
   const leftmenu = [
@@ -63,7 +61,7 @@ export default function Navbar(props) {
                     <a className="w-28 dark:hidden">
                       {props.logo ? (
                         <Image
-                          {...GetImage(props.logo)}
+                          src={props.logo}
                           alt="Logo"
                           sizes="(max-width: 640px) 100vw, 200px"
                           priority={true}
@@ -79,7 +77,7 @@ export default function Navbar(props) {
                     <a className="hidden w-28 dark:block">
                       {props.logoalt ? (
                         <Image
-                          {...GetImage(props.logoalt)}
+                          src={props.logoalt}
                           alt="Logo"
                           sizes="(max-width: 640px) 100vw, 200px"
                           priority={true}

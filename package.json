@@ -19,6 +19,7 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.2",
     "date-fns": "^2.28.0",
+    "gray-matter": "^4.0.3",
     "next": "^12.1.6",
     "next-sanity": "^0.5.2",
     "next-sanity-image": "^3.2.1",
@@ -27,6 +28,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.31.2",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.1",
     "use-web3forms": "^1.2.1"
   },
   "devDependencies": {
